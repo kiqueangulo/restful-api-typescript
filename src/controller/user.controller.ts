@@ -5,7 +5,7 @@ import { createUser } from "../service/user.service";
 import logger from "../utils/logger";
 
 export async function createUserHandler(
-  req: Request<{}, {}, CreateUserInput>,
+  req: Request<{}, {}, CreateUserInput["body"]>,
   res: Response
 ) {
   try {

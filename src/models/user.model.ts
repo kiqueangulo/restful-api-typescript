@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import bcrypt from "bcrypt";
+import config from "config";
 
 export interface UserDocument extends mongoose.Document {
   email: string;
@@ -26,6 +28,20 @@ const userSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+// Check this section due to adjustments with documentation
+userSchema.pre<HydratedDocument<UserDocument>>("save", async function (next) {
+  let user = this as UserDocument;
+
+  if (!user.isModified("password")) return next();
+
+  const salt = await bcrypt.genSalt(config.get<number>("saltWorkFactor"));
+  const hash = await bcrypt.hash(user.password, salt);
+
+  user.password = hash;
+
+  return next();
+});
 
 const UserModel = mongoose.model("User", userSchema);
 

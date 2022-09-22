@@ -12,9 +12,14 @@ const deserializeUser = (req: Request, res: Response, next: NextFunction) => {
   if (!accessToken) return next();
 
   const { decoded } = verifyJwt(accessToken);
+  console.log("Decoded token", decoded);
 
   if (decoded) {
     res.locals.user = decoded;
     return next();
   }
+
+  return next();
 };
+
+export default deserializeUser;

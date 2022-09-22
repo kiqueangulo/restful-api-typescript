@@ -8,6 +8,7 @@ import { createUserHandler } from "./controller/user.controller";
 import { createUserSchema } from "./schema/user.schema";
 import { createSessionSchema } from "./schema/session.schema";
 import validateResource from "./middleware/validateResource";
+import requireUser from "./middleware/requireUser";
 
 function routes(app: Express) {
   app.get("/healthCheck", async (req: Request, res: Response) =>
@@ -22,7 +23,7 @@ function routes(app: Express) {
     createUserSessionHandler
   );
 
-  app.get("/api/sessions", getUserSessionsHandler);
+  app.get("/api/sessions", requireUser, getUserSessionsHandler);
 }
 
 export default routes;

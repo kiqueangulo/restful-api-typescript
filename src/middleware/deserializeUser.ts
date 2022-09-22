@@ -10,6 +10,7 @@ const deserializeUser = (req: Request, res: Response, next: NextFunction) => {
   );
 
   if (!accessToken) return next();
+  console.log("Access token", accessToken);
 
   const { decoded } = verifyJwt(accessToken);
   console.log("Decoded token", decoded);

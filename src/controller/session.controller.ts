@@ -12,7 +12,7 @@ export async function createUserSessionHandler(req: Request, res: Response) {
   if (!user) return res.status(401).send("Invalid email or password");
 
   // Create a session
-  const session = await createSession(user._id, req.get("userAgent") || "");
+  const session = await createSession(user._id, req.get("user-agent") || "");
 
   // Create an access token
   const accessToken = signJwt(
@@ -33,7 +33,8 @@ export async function createUserSessionHandler(req: Request, res: Response) {
 export async function getUserSessionsHandler(req: Request, res: Response) {
   const userId = res.locals.user._id;
   console.log("This is the user id", userId);
-  const sessions = await findSessions({ user: userId, valid: false });
+
+  const sessions = await findSessions({ user: userId, valid: true });
   console.log("These are the sessions", { sessions });
 
   return res.send(sessions);

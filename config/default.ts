@@ -2,6 +2,8 @@ export default {
   port: 1337,
   dbUri: "mongodb://localhost:27017/restful-api-typescript",
   saltWorkFactor: 10,
+  accessTokenTtl: "15m",
+  refreshTokenTtl: "1y",
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCFOfl15Gwb8j3TitedBYGSZqvr
 tdwkndYE0KE6wxKtjH0OyJYePDdx49WB/0D8QKbIXQSaiX3kCL36C9+q+EPSIVp7

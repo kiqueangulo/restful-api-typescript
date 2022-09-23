@@ -2,6 +2,7 @@ import { Express, Request, Response } from "express";
 
 import {
   createUserSessionHandler,
+  deleteSessionHandler,
   getUserSessionsHandler,
 } from "./controller/session.controller";
 import { createUserHandler } from "./controller/user.controller";
@@ -24,6 +25,8 @@ function routes(app: Express) {
   );
 
   app.get("/api/sessions", requireUser, getUserSessionsHandler);
+
+  app.delete("/api/sessions", requireUser, deleteSessionHandler);
 }
 
 export default routes;

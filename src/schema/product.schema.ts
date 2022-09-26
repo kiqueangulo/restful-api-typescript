@@ -26,7 +26,7 @@ export const deleteProductSchema = object({ ...params });
 
 export const getProductSchema = object({ ...params });
 
-export type createProductInput = TypeOf<typeof createProductSchema>;
-export type updateProductInput = TypeOf<typeof updateProductSchema>;
+export type CreateProductInput = TypeOf<typeof createProductSchema>;
+export type UpdateProductInput = TypeOf<typeof updateProductSchema>;
 export type ReadProductInput = TypeOf<typeof getProductSchema>;
 export type DeleteProductInput = TypeOf<typeof deleteProductSchema>;

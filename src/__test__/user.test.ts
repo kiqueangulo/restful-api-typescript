@@ -1,3 +1,10 @@
+const userInput = {
+  email: "test@example.com",
+  name: "Jane Doe",
+  password: "Password123",
+  passwordConfirmation: "Password123",
+};
+
 describe("user", () => {
   // User registration
   describe("user registration", () => {

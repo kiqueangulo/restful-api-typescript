@@ -46,7 +46,20 @@ describe("user", () => {
 
     // Verify that passwords must match (password and confirm password)
     describe("given the passwords do not match", () => {
-      it("should return a 400", () => {});
+      it("should return a 400", async () => {
+        const createUserServiceMock = jest
+          .spyOn(UserService, "createUser")
+          // @ts-ignore
+          .mockReturnValueOnce(userPayload);
+
+        const { statusCode } = await supertest(app)
+          .post("/api/users")
+          .send({ ...userInput, passwordConfirmation: "doesnotmatch" });
+
+        expect(statusCode).toBe(400);
+
+        expect(createUserServiceMock).not.toHaveBeenCalled();
+      });
     });
 
     // Verify that the handler handles any errors
